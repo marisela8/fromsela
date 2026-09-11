@@ -4,429 +4,561 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Nathan ❤️</title>
+
+<title>❤️</title>
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    height: 100vh;
-    background: radial-gradient(circle at center, #3b0718, #12000a 70%);
+}
+
+body {
+    background:
+        radial-gradient(circle at 50% 45%, #5b1029 0%, #250812 35%, #090207 75%);
     font-family: Georgia, serif;
-    color: white;
 }
 
-/* Floating hearts */
-.heart {
+/* DREAMY GLOW */
+
+.glow {
     position: absolute;
-    bottom: -50px;
-    font-size: 25px;
-    animation: floatUp linear infinite;
-    opacity: 0;
-    pointer-events: none;
+    width: 500px;
+    height: 500px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(255, 35, 90, 0.12);
+    filter: blur(80px);
+    animation: breathe 4s ease-in-out infinite;
 }
 
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) scale(0.5) rotate(0deg);
-        opacity: 0;
+@keyframes breathe {
+    0%,100% {
+        transform: translate(-50%, -50%) scale(.8);
+        opacity: .5;
     }
 
-    15% {
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
         opacity: 1;
     }
+}
 
-    100% {
-        transform: translateY(-110vh) scale(1.4) rotate(25deg);
-        opacity: 0;
+/* STARS */
+
+.star {
+    position: absolute;
+    color: white;
+    font-size: 4px;
+    opacity: .7;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: .1;
+        transform: scale(.5);
     }
-}
 
-/* Main screen */
-.container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    z-index: 5;
-}
-
-/* Small intro */
-.intro {
-    font-size: 18px;
-    letter-spacing: 4px;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-}
-
-@keyframes fadeIn {
     to {
         opacity: 1;
+        transform: scale(1.7);
     }
 }
 
-/* Giant heart */
-.big-heart {
-    font-size: 110px;
-    margin: 25px 0;
-    animation: heartbeat 1.2s infinite;
-    filter: drop-shadow(0 0 25px #ff1744);
+/* MAIN */
+
+.scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* HEART */
+
+.heart {
+    position: absolute;
+    font-size: 145px;
+    filter:
+        drop-shadow(0 0 15px #ff1744)
+        drop-shadow(0 0 45px #ff1744);
+    animation: heartbeat 1.5s infinite;
+    z-index: 3;
 }
 
 @keyframes heartbeat {
-    0%, 100% {
+
+    0%,100% {
         transform: scale(1);
     }
 
-    15% {
-        transform: scale(1.18);
+    10% {
+        transform: scale(1.12);
+    }
+
+    20% {
+        transform: scale(1);
     }
 
     30% {
-        transform: scale(1);
+        transform: scale(1.08);
     }
 
     45% {
-        transform: scale(1.12);
+        transform: scale(1);
     }
 }
 
-/* Arrow */
-.arrow {
+/* TIGERS */
+
+.tiger {
     position: absolute;
-    left: -150px;
-    top: 46%;
-    font-size: 65px;
-    transform: rotate(0deg);
-    animation: shoot 3s ease-in-out 2s forwards;
-    z-index: 10;
-    filter: drop-shadow(0 0 10px white);
+    font-size: 70px;
+    z-index: 4;
+    filter: drop-shadow(0 0 12px rgba(255,120,120,.5));
 }
 
-@keyframes shoot {
+.tiger.left {
+    left: 18%;
+    top: 50%;
+    transform: translateY(-50%) rotate(-8deg);
+    animation: tigerLeft 4s ease-in-out infinite;
+}
+
+.tiger.right {
+    right: 18%;
+    top: 50%;
+    transform: translateY(-50%) rotate(8deg);
+    animation: tigerRight 4s ease-in-out infinite;
+}
+
+@keyframes tigerLeft {
+    0%,100% {
+        transform: translateY(-50%) rotate(-8deg);
+    }
+
+    50% {
+        transform: translateY(-55%) rotate(3deg);
+    }
+}
+
+@keyframes tigerRight {
+    0%,100% {
+        transform: translateY(-50%) rotate(8deg);
+    }
+
+    50% {
+        transform: translateY(-45%) rotate(-3deg);
+    }
+}
+
+/* LOVE TEXT */
+
+.love {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+
+    color: white;
+
+    font-size: clamp(28px, 6vw, 70px);
+
+    letter-spacing: 5px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 8px #fff,
+        0 0 20px #ff4770,
+        0 0 40px #ff1744,
+        0 0 80px #ff1744;
+
+    opacity: 0;
+
+    animation:
+        reveal 3s ease forwards 2s,
+        textGlow 3s ease-in-out infinite alternate 5s;
+}
+
+@keyframes reveal {
+
     0% {
-        left: -150px;
+        opacity: 0;
+        transform: scale(.4);
+        filter: blur(15px);
     }
 
-    70% {
-        left: 42%;
-    }
-
-    78% {
-        left: 47%;
-        transform: scale(1.2);
-    }
-
-    85% {
-        left: 50%;
-        transform: scale(0.8);
+    60% {
+        opacity: 1;
+        transform: scale(1.08);
+        filter: blur(0);
     }
 
     100% {
-        left: 50%;
-        opacity: 0;
-    }
-}
-
-/* Love text */
-.love {
-    font-size: 42px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: #fff;
-    text-shadow:
-        0 0 10px #ff1744,
-        0 0 25px #ff1744,
-        0 0 50px #ff1744;
-    opacity: 0;
-    animation: revealLove 2s ease 4.7s forwards;
-}
-
-@keyframes revealLove {
-    from {
-        opacity: 0;
-        transform: scale(0.4);
-    }
-
-    to {
         opacity: 1;
         transform: scale(1);
     }
 }
 
-.name {
-    margin-top: 12px;
-    font-size: 28px;
-    color: #ffb6c9;
-    opacity: 0;
-    animation: revealName 2s ease 5.3s forwards;
-}
+@keyframes textGlow {
 
-@keyframes revealName {
     from {
-        opacity: 0;
-        transform: translateY(15px);
+        text-shadow:
+            0 0 8px white,
+            0 0 20px #ff4770,
+            0 0 40px #ff1744;
     }
 
     to {
-        opacity: 1;
-        transform: translateY(0);
+        text-shadow:
+            0 0 15px white,
+            0 0 35px #ff6688,
+            0 0 70px #ff1744,
+            0 0 100px #ff1744;
     }
 }
 
-/* Button */
-button {
-    margin-top: 35px;
-    padding: 14px 28px;
-    border: 1px solid #ff6688;
-    border-radius: 30px;
-    background: rgba(255, 20, 70, 0.2);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: Georgia, serif;
-    transition: 0.3s;
-    opacity: 0;
-    animation: fadeInButton 2s ease 6s forwards;
-}
+/* FLOATING HEARTS */
 
-button:hover {
-    background: #ff1744;
-    transform: scale(1.08);
-    box-shadow: 0 0 25px #ff1744;
-}
-
-@keyframes fadeInButton {
-    to {
-        opacity: 1;
-    }
-}
-
-/* Hidden message */
-.message {
-    display: none;
-    max-width: 600px;
-    padding: 25px;
-    line-height: 1.8;
-    font-size: 18px;
-    color: #ffdbe5;
-    animation: messageAppear 1s ease forwards;
-}
-
-@keyframes messageAppear {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Sparkles */
-.sparkle {
+.floating-heart {
     position: absolute;
+    bottom: -60px;
     font-size: 20px;
-    animation: sparkle 1.5s ease-out forwards;
-    pointer-events: none;
+    opacity: 0;
+
+    animation:
+        floatUp linear forwards;
+
+    z-index: 2;
 }
 
-@keyframes sparkle {
+@keyframes floatUp {
+
     0% {
-        transform: scale(0);
+        transform:
+            translateY(0)
+            translateX(0)
+            scale(.5)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    50% {
+        transform:
+            translateY(-50vh)
+            translateX(40px)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            translateX(-40px)
+            scale(1.5)
+            rotate(30deg);
+
+        opacity: 0;
+    }
+}
+
+/* HEART PARTICLES */
+
+.particle {
+    position: absolute;
+    font-size: 16px;
+    pointer-events: none;
+
+    animation: burst 2s ease-out forwards;
+}
+
+@keyframes burst {
+
+    0% {
+        transform: translate(0,0) scale(.2);
         opacity: 1;
     }
 
     100% {
-        transform: translate(
-            calc((var(--x)) * 1px),
-            calc((var(--y)) * 1px)
-        ) scale(1.5);
+        transform:
+            translate(var(--x), var(--y))
+            scale(1.4);
+
         opacity: 0;
     }
 }
 
-/* Mobile */
-@media (max-width: 600px) {
+/* ARROW */
+
+.arrow {
+    position: absolute;
+    left: -120px;
+    top: 50%;
+
+    font-size: 60px;
+
+    z-index: 20;
+
+    animation: shoot 2.4s cubic-bezier(.2,.8,.2,1) forwards 1s;
+
+    filter:
+        drop-shadow(0 0 8px white)
+        drop-shadow(0 0 20px #ff1744);
+}
+
+@keyframes shoot {
+
+    0% {
+        left: -120px;
+        opacity: 1;
+    }
+
+    80% {
+        left: 46%;
+        opacity: 1;
+    }
+
+    90% {
+        left: 50%;
+        transform: scale(1.2);
+    }
+
+    100% {
+        left: 51%;
+        opacity: 0;
+    }
+}
+
+/* FLASH */
+
+.flash {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+
+    pointer-events: none;
+
+    animation: flash 1s ease 3.2s;
+}
+
+@keyframes flash {
+
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: .35;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    .heart {
+        font-size: 110px;
+    }
+
+    .tiger {
+        font-size: 45px;
+    }
+
+    .tiger.left {
+        left: 8%;
+    }
+
+    .tiger.right {
+        right: 8%;
+    }
 
     .love {
-        font-size: 30px;
-    }
-
-    .name {
-        font-size: 23px;
-    }
-
-    .big-heart {
-        font-size: 90px;
+        width: 90%;
+        letter-spacing: 3px;
+        line-height: 1.4;
     }
 
     .arrow {
-        font-size: 50px;
-    }
-
-    .message {
-        padding: 20px;
-        font-size: 16px;
+        font-size: 45px;
     }
 }
+
 </style>
 </head>
 
 <body>
 
-<div id="hearts"></div>
+<div class="glow"></div>
 
-<div class="container">
+<div class="scene">
 
-    <div class="intro">
-        Sela HAS A MESSAGE FOR YOU...
-    </div>
+    <div class="flash"></div>
 
-    <div class="big-heart" id="bigHeart">
+    <!-- TIGERS -->
+    <div class="tiger left">🐅</div>
+    <div class="tiger right">🐅</div>
+
+    <!-- HEART -->
+    <div class="heart" id="heart">
         ❤️
     </div>
 
+    <!-- ARROW -->
     <div class="arrow">
         🏹
     </div>
 
+    <!-- ONLY WORDS ON THE PAGE -->
     <div class="love">
-        I LOVE YOU
-    </div>
-
-    <div class="name">
-        Nathan Lesukiviti ❤️
-    </div>
-
-    <button onclick="showMessage()">
-        💌 Open
-    </button>
-
-    <div class="message" id="message">
-        Nathan, if you ever wonder how much you mean to me,
-        I hope this little corner of the internet reminds you. ❤️
-        <br><br>
-        Out of all the people in this world,
-        somehow my heart found yours.
-        <br><br>
-        And honestly...
-        I wouldn't want it any other way.
-        <br><br>
-        <strong>I love you so mattchhaaaa booo Nathan. ❤️</strong>
+        I LOVE YOU<br>
+        NATHAN LESUKIVITI
     </div>
 
 </div>
 
 <script>
 
-/* Create floating hearts */
-const heartContainer = document.getElementById("hearts");
+/* STARS */
 
-const hearts = ["❤️", "💗", "💕", "💖", "💘", "💓"];
+for(let i = 0; i < 100; i++){
 
-for (let i = 0; i < 45; i++) {
+    const star = document.createElement("div");
 
-    const heart = document.createElement("div");
+    star.className = "star";
 
-    heart.className = "heart";
+    star.innerHTML = "✦";
 
-    heart.innerHTML =
-        hearts[Math.floor(Math.random() * hearts.length)];
+    star.style.left = Math.random()*100 + "%";
+    star.style.top = Math.random()*100 + "%";
 
-    heart.style.left =
-        Math.random() * 100 + "%";
+    star.style.animationDelay =
+        Math.random()*3 + "s";
 
-    heart.style.fontSize =
-        (15 + Math.random() * 30) + "px";
+    star.style.fontSize =
+        (2 + Math.random()*5) + "px";
 
-    heart.style.animationDuration =
-        (5 + Math.random() * 7) + "s";
-
-    heart.style.animationDelay =
-        Math.random() * 8 + "s";
-
-    heartContainer.appendChild(heart);
+    document.body.appendChild(star);
 }
 
 
-/* Sparkles when arrow hits */
+/* FLOATING HEARTS */
+
+const heartSymbols = [
+    "❤️",
+    "💗",
+    "💖",
+    "💕",
+    "💘",
+    "💓"
+];
+
+function createHeart(){
+
+    const h = document.createElement("div");
+
+    h.className = "floating-heart";
+
+    h.innerHTML =
+        heartSymbols[
+            Math.floor(
+                Math.random()*heartSymbols.length
+            )
+        ];
+
+    h.style.left =
+        Math.random()*100 + "%";
+
+    h.style.fontSize =
+        (12 + Math.random()*25) + "px";
+
+    h.style.animationDuration =
+        (5 + Math.random()*6) + "s";
+
+    document.body.appendChild(h);
+
+    setTimeout(() => {
+        h.remove();
+    }, 12000);
+}
+
+setInterval(createHeart, 350);
+
+
+/* HEART EXPLOSION */
+
 setTimeout(() => {
 
-    const bigHeart =
-        document.getElementById("bigHeart");
+    const heart =
+        document.getElementById("heart");
 
     const rect =
-        bigHeart.getBoundingClientRect();
+        heart.getBoundingClientRect();
 
     const centerX =
-        rect.left + rect.width / 2;
+        rect.left + rect.width/2;
 
     const centerY =
-        rect.top + rect.height / 2;
+        rect.top + rect.height/2;
 
-    for (let i = 0; i < 30; i++) {
+    for(let i=0; i<50; i++){
 
-        const sparkle =
+        const p =
             document.createElement("div");
 
-        sparkle.className = "sparkle";
+        p.className = "particle";
 
-        sparkle.innerHTML = "✨";
+        p.innerHTML =
+            Math.random() > .5
+            ? "❤️"
+            : "✨";
 
-        sparkle.style.left =
+        p.style.left =
             centerX + "px";
 
-        sparkle.style.top =
+        p.style.top =
             centerY + "px";
 
-        sparkle.style.setProperty(
+        p.style.setProperty(
             "--x",
-            (Math.random() * 400 - 200)
+            (Math.random()*500-250) + "px"
         );
 
-        sparkle.style.setProperty(
+        p.style.setProperty(
             "--y",
-            (Math.random() * 400 - 200)
+            (Math.random()*500-250) + "px"
         );
 
-        document.body.appendChild(sparkle);
+        document.body.appendChild(p);
 
         setTimeout(() => {
-            sparkle.remove();
-        }, 1500);
+            p.remove();
+        }, 2000);
     }
 
-}, 4800);
-
-
-/* Love message */
-function showMessage() {
-
-    document.getElementById("bigHeart").style.display = "none";
-
-    document.querySelector(".intro").style.display = "none";
-
-    document.querySelector(".love").style.display = "none";
-
-    document.querySelector(".name").style.display = "none";
-
-    document.querySelector(".arrow").style.display = "none";
-
-    document.querySelector("button").style.display = "none";
-
-    document.getElementById("message").style.display = "block";
-}
+}, 3200);
 
 </script>
 
