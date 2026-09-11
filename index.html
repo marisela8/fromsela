@@ -1,92 +1,436 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Message For My Amazing Naba 1 Mom ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Nathan ❤️</title>
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Georgia, serif;
-            background: linear-gradient(135deg, #ffd6e7, #fff0f5);
-            text-align: center;
-            color: #6b2145;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .card {
-            background: green;
-            padding: 40px;
-            border-radius: 25px;
-            width: 85%;
-            max-width: 420px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
+body {
+    overflow: hidden;
+    height: 100vh;
+    background: radial-gradient(circle at center, #3b0718, #12000a 70%);
+    font-family: Georgia, serif;
+    color: white;
+}
 
-        h1 {
-            font-size: 28px;
-        }
+/* Floating hearts */
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 25px;
+    animation: floatUp linear infinite;
+    opacity: 0;
+    pointer-events: none;
+}
 
-        button {
-            background: #d63384;
-            color: white;
-            border: none;
-            padding: 14px 25px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
 
-        button:hover {
-            background: #ad2165;
-        }
+    15% {
+        opacity: 1;
+    }
 
-        #message {
-            display: none;
-            margin-top: 25px;
-            font-size: 20px;
-            line-height: 1.7;
-        }
+    100% {
+        transform: translateY(-110vh) scale(1.4) rotate(25deg);
+        opacity: 0;
+    }
+}
 
-        .heart {
-            font-size: 45px;
-        }
-    </style>
+/* Main screen */
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+}
+
+/* Small intro */
+.intro {
+    font-size: 18px;
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Giant heart */
+.big-heart {
+    font-size: 110px;
+    margin: 25px 0;
+    animation: heartbeat 1.2s infinite;
+    filter: drop-shadow(0 0 25px #ff1744);
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.18);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.12);
+    }
+}
+
+/* Arrow */
+.arrow {
+    position: absolute;
+    left: -150px;
+    top: 46%;
+    font-size: 65px;
+    transform: rotate(0deg);
+    animation: shoot 3s ease-in-out 2s forwards;
+    z-index: 10;
+    filter: drop-shadow(0 0 10px white);
+}
+
+@keyframes shoot {
+    0% {
+        left: -150px;
+    }
+
+    70% {
+        left: 42%;
+    }
+
+    78% {
+        left: 47%;
+        transform: scale(1.2);
+    }
+
+    85% {
+        left: 50%;
+        transform: scale(0.8);
+    }
+
+    100% {
+        left: 50%;
+        opacity: 0;
+    }
+}
+
+/* Love text */
+.love {
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #fff;
+    text-shadow:
+        0 0 10px #ff1744,
+        0 0 25px #ff1744,
+        0 0 50px #ff1744;
+    opacity: 0;
+    animation: revealLove 2s ease 4.7s forwards;
+}
+
+@keyframes revealLove {
+    from {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.name {
+    margin-top: 12px;
+    font-size: 28px;
+    color: #ffb6c9;
+    opacity: 0;
+    animation: revealName 2s ease 5.3s forwards;
+}
+
+@keyframes revealName {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button */
+button {
+    margin-top: 35px;
+    padding: 14px 28px;
+    border: 1px solid #ff6688;
+    border-radius: 30px;
+    background: rgba(255, 20, 70, 0.2);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    transition: 0.3s;
+    opacity: 0;
+    animation: fadeInButton 2s ease 6s forwards;
+}
+
+button:hover {
+    background: #ff1744;
+    transform: scale(1.08);
+    box-shadow: 0 0 25px #ff1744;
+}
+
+@keyframes fadeInButton {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Hidden message */
+.message {
+    display: none;
+    max-width: 600px;
+    padding: 25px;
+    line-height: 1.8;
+    font-size: 18px;
+    color: #ffdbe5;
+    animation: messageAppear 1s ease forwards;
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sparkles */
+.sparkle {
+    position: absolute;
+    font-size: 20px;
+    animation: sparkle 1.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes sparkle {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(
+            calc((var(--x)) * 1px),
+            calc((var(--y)) * 1px)
+        ) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .love {
+        font-size: 30px;
+    }
+
+    .name {
+        font-size: 23px;
+    }
+
+    .big-heart {
+        font-size: 90px;
+    }
+
+    .arrow {
+        font-size: 50px;
+    }
+
+    .message {
+        padding: 20px;
+        font-size: 16px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<div class="card">
-    <div class="heart">💌</div>
+<div id="hearts"></div>
 
-    <h1>Hi Na...</h1>
+<div class="container">
 
-    <p>There is something I want you to open.</p>
+    <div class="intro">
+        Sela HAS A MESSAGE FOR YOU...
+    </div>
 
-    <button onclick="revealMessage()">Tap to reveal ❤️</button>
-
-    <div id="message">
-        <strong>I LOVE YOU, Na ❤️</strong>
-        <br><br>
-        You are my world and im grateful for your life,
-        You are my favourite person in this whole world.
-        <br><br>
-        No matter how simple this little page is,
-        I just wanted you to know that I LOVE YOU and I made it just for you🥹❤️.
-        <br><br>
+    <div class="big-heart" id="bigHeart">
         ❤️
     </div>
+
+    <div class="arrow">
+        🏹
+    </div>
+
+    <div class="love">
+        I LOVE YOU
+    </div>
+
+    <div class="name">
+        Nathan Lesukiviti ❤️
+    </div>
+
+    <button onclick="showMessage()">
+        💌 Open
+    </button>
+
+    <div class="message" id="message">
+        Nathan, if you ever wonder how much you mean to me,
+        I hope this little corner of the internet reminds you. ❤️
+        <br><br>
+        Out of all the people in this world,
+        somehow my heart found yours.
+        <br><br>
+        And honestly...
+        I wouldn't want it any other way.
+        <br><br>
+        <strong>I love you so mattchhaaaa booo Nathan. ❤️</strong>
+    </div>
+
 </div>
 
 <script>
-function revealMessage() {
+
+/* Create floating hearts */
+const heartContainer = document.getElementById("hearts");
+
+const hearts = ["❤️", "💗", "💕", "💖", "💘", "💓"];
+
+for (let i = 0; i < 45; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 30) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 7) + "s";
+
+    heart.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    heartContainer.appendChild(heart);
+}
+
+
+/* Sparkles when arrow hits */
+setTimeout(() => {
+
+    const bigHeart =
+        document.getElementById("bigHeart");
+
+    const rect =
+        bigHeart.getBoundingClientRect();
+
+    const centerX =
+        rect.left + rect.width / 2;
+
+    const centerY =
+        rect.top + rect.height / 2;
+
+    for (let i = 0; i < 30; i++) {
+
+        const sparkle =
+            document.createElement("div");
+
+        sparkle.className = "sparkle";
+
+        sparkle.innerHTML = "✨";
+
+        sparkle.style.left =
+            centerX + "px";
+
+        sparkle.style.top =
+            centerY + "px";
+
+        sparkle.style.setProperty(
+            "--x",
+            (Math.random() * 400 - 200)
+        );
+
+        sparkle.style.setProperty(
+            "--y",
+            (Math.random() * 400 - 200)
+        );
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1500);
+    }
+
+}, 4800);
+
+
+/* Love message */
+function showMessage() {
+
+    document.getElementById("bigHeart").style.display = "none";
+
+    document.querySelector(".intro").style.display = "none";
+
+    document.querySelector(".love").style.display = "none";
+
+    document.querySelector(".name").style.display = "none";
+
+    document.querySelector(".arrow").style.display = "none";
+
+    document.querySelector("button").style.display = "none";
+
     document.getElementById("message").style.display = "block";
 }
+
 </script>
 
 </body>
 </html>
+```
+
