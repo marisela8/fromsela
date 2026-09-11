@@ -4,565 +4,228 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>❤️</title>
 
 <style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
-body {
+body{
     background:
-        radial-gradient(circle at 50% 45%, #5b1029 0%, #250812 35%, #090207 75%);
-    font-family: Georgia, serif;
+        radial-gradient(circle at 50% 45%, #64152e 0%, #2b0718 28%, #10030d 62%, #030107 100%);
+    font-family:Georgia,serif;
 }
 
-/* DREAMY GLOW */
+/* =========================
+   MOON
+========================= */
 
-.glow {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: rgba(255, 35, 90, 0.12);
-    filter: blur(80px);
-    animation: breathe 4s ease-in-out infinite;
+.moon{
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:#fff7e8;
+    top:9%;
+    right:13%;
+
+    box-shadow:
+        0 0 25px #fff,
+        0 0 70px rgba(255,230,210,.7),
+        0 0 130px rgba(255,180,190,.25);
+
+    animation:moonGlow 5s ease-in-out infinite;
 }
 
-@keyframes breathe {
-    0%,100% {
-        transform: translate(-50%, -50%) scale(.8);
-        opacity: .5;
+@keyframes moonGlow{
+    0%,100%{
+        box-shadow:
+        0 0 25px #fff,
+        0 0 60px rgba(255,230,210,.6);
     }
 
-    50% {
-        transform: translate(-50%, -50%) scale(1.2);
-        opacity: 1;
-    }
-}
-
-/* STARS */
-
-.star {
-    position: absolute;
-    color: white;
-    font-size: 4px;
-    opacity: .7;
-    animation: twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle {
-    from {
-        opacity: .1;
-        transform: scale(.5);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1.7);
+    50%{
+        box-shadow:
+        0 0 35px #fff,
+        0 0 100px rgba(255,220,220,.9);
     }
 }
 
-/* MAIN */
+/* =========================
+   STARS
+========================= */
 
-.scene {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.star{
+    position:absolute;
+    color:white;
+    animation:twinkle 2s ease-in-out infinite alternate;
+    opacity:.7;
 }
 
-/* HEART */
+@keyframes twinkle{
+    from{
+        opacity:.15;
+        transform:scale(.5);
+    }
 
-.heart {
-    position: absolute;
-    font-size: 145px;
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+/* =========================
+   SOFT LIGHT
+========================= */
+
+.glow{
+    position:absolute;
+    width:600px;
+    height:600px;
+    left:50%;
+    top:53%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+
+    background:rgba(255,20,75,.12);
+    filter:blur(100px);
+
+    animation:breathingGlow 5s infinite ease-in-out;
+}
+
+@keyframes breathingGlow{
+    0%,100%{
+        transform:translate(-50%,-50%) scale(.8);
+    }
+
+    50%{
+        transform:translate(-50%,-50%) scale(1.2);
+    }
+}
+
+/* =========================
+   MAIN HEART
+========================= */
+
+.heart{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
+    font-size:155px;
+
+    z-index:5;
+
     filter:
         drop-shadow(0 0 15px #ff1744)
-        drop-shadow(0 0 45px #ff1744);
-    animation: heartbeat 1.5s infinite;
-    z-index: 3;
+        drop-shadow(0 0 45px #ff1744)
+        drop-shadow(0 0 90px rgba(255,0,70,.7));
+
+    animation:heartbeat 1.5s infinite;
 }
 
-@keyframes heartbeat {
-
-    0%,100% {
-        transform: scale(1);
+@keyframes heartbeat{
+    0%,100%{
+        transform:translate(-50%,-50%) scale(1);
     }
 
-    10% {
-        transform: scale(1.12);
+    10%{
+        transform:translate(-50%,-50%) scale(1.13);
     }
 
-    20% {
-        transform: scale(1);
+    20%{
+        transform:translate(-50%,-50%) scale(1);
     }
 
-    30% {
-        transform: scale(1.08);
+    30%{
+        transform:translate(-50%,-50%) scale(1.08);
     }
 
-    45% {
-        transform: scale(1);
-    }
-}
-
-/* TIGERS */
-
-.tiger {
-    position: absolute;
-    font-size: 70px;
-    z-index: 4;
-    filter: drop-shadow(0 0 12px rgba(255,120,120,.5));
-}
-
-.tiger.left {
-    left: 18%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-8deg);
-    animation: tigerLeft 4s ease-in-out infinite;
-}
-
-.tiger.right {
-    right: 18%;
-    top: 50%;
-    transform: translateY(-50%) rotate(8deg);
-    animation: tigerRight 4s ease-in-out infinite;
-}
-
-@keyframes tigerLeft {
-    0%,100% {
-        transform: translateY(-50%) rotate(-8deg);
-    }
-
-    50% {
-        transform: translateY(-55%) rotate(3deg);
+    45%{
+        transform:translate(-50%,-50%) scale(1);
     }
 }
 
-@keyframes tigerRight {
-    0%,100% {
-        transform: translateY(-50%) rotate(8deg);
-    }
+/* =========================
+   TIGERS
+========================= */
 
-    50% {
-        transform: translateY(-45%) rotate(-3deg);
-    }
-}
-
-/* LOVE TEXT */
-
-.love {
-    position: absolute;
-    z-index: 10;
-    text-align: center;
-
-    color: white;
-
-    font-size: clamp(28px, 6vw, 70px);
-
-    letter-spacing: 5px;
-
-    font-weight: bold;
-
-    text-shadow:
-        0 0 8px #fff,
-        0 0 20px #ff4770,
-        0 0 40px #ff1744,
-        0 0 80px #ff1744;
-
-    opacity: 0;
-
-    animation:
-        reveal 3s ease forwards 2s,
-        textGlow 3s ease-in-out infinite alternate 5s;
-}
-
-@keyframes reveal {
-
-    0% {
-        opacity: 0;
-        transform: scale(.4);
-        filter: blur(15px);
-    }
-
-    60% {
-        opacity: 1;
-        transform: scale(1.08);
-        filter: blur(0);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes textGlow {
-
-    from {
-        text-shadow:
-            0 0 8px white,
-            0 0 20px #ff4770,
-            0 0 40px #ff1744;
-    }
-
-    to {
-        text-shadow:
-            0 0 15px white,
-            0 0 35px #ff6688,
-            0 0 70px #ff1744,
-            0 0 100px #ff1744;
-    }
-}
-
-/* FLOATING HEARTS */
-
-.floating-heart {
-    position: absolute;
-    bottom: -60px;
-    font-size: 20px;
-    opacity: 0;
-
-    animation:
-        floatUp linear forwards;
-
-    z-index: 2;
-}
-
-@keyframes floatUp {
-
-    0% {
-        transform:
-            translateY(0)
-            translateX(0)
-            scale(.5)
-            rotate(0deg);
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: .8;
-    }
-
-    50% {
-        transform:
-            translateY(-50vh)
-            translateX(40px)
-            scale(1);
-    }
-
-    100% {
-        transform:
-            translateY(-115vh)
-            translateX(-40px)
-            scale(1.5)
-            rotate(30deg);
-
-        opacity: 0;
-    }
-}
-
-/* HEART PARTICLES */
-
-.particle {
-    position: absolute;
-    font-size: 16px;
-    pointer-events: none;
-
-    animation: burst 2s ease-out forwards;
-}
-
-@keyframes burst {
-
-    0% {
-        transform: translate(0,0) scale(.2);
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(var(--x), var(--y))
-            scale(1.4);
-
-        opacity: 0;
-    }
-}
-
-/* ARROW */
-
-.arrow {
-    position: absolute;
-    left: -120px;
-    top: 50%;
-
-    font-size: 60px;
-
-    z-index: 20;
-
-    animation: shoot 2.4s cubic-bezier(.2,.8,.2,1) forwards 1s;
+.tiger{
+    position:absolute;
+    font-size:78px;
+    z-index:7;
 
     filter:
-        drop-shadow(0 0 8px white)
-        drop-shadow(0 0 20px #ff1744);
+        drop-shadow(0 0 12px rgba(255,120,140,.5));
+
+    animation:guardian 4s ease-in-out infinite;
 }
 
-@keyframes shoot {
-
-    0% {
-        left: -120px;
-        opacity: 1;
-    }
-
-    80% {
-        left: 46%;
-        opacity: 1;
-    }
-
-    90% {
-        left: 50%;
-        transform: scale(1.2);
-    }
-
-    100% {
-        left: 51%;
-        opacity: 0;
-    }
+.tiger.left{
+    left:13%;
+    top:52%;
+    transform:translateY(-50%);
 }
 
-/* FLASH */
-
-.flash {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: white;
-    opacity: 0;
-
-    pointer-events: none;
-
-    animation: flash 1s ease 3.2s;
+.tiger.right{
+    right:13%;
+    top:52%;
+    transform:translateY(-50%);
+    animation-delay:1s;
 }
 
-@keyframes flash {
+@keyframes guardian{
 
-    0% {
-        opacity: 0;
+    0%,100%{
+        transform:translateY(-50%) scale(1) rotate(0deg);
     }
 
-    30% {
-        opacity: .35;
-    }
-
-    100% {
-        opacity: 0;
+    50%{
+        transform:translateY(-55%) scale(1.06) rotate(2deg);
     }
 }
 
-/* MOBILE */
+/* =========================
+   HEART CONSTELLATION
+========================= */
 
-@media(max-width:600px) {
+.constellation{
+    position:absolute;
+    width:430px;
+    height:360px;
 
-    .heart {
-        font-size: 110px;
-    }
+    left:50%;
+    top:50%;
 
-    .tiger {
-        font-size: 45px;
-    }
+    transform:translate(-50%,-50%);
 
-    .tiger.left {
-        left: 8%;
-    }
-
-    .tiger.right {
-        right: 8%;
-    }
-
-    .love {
-        width: 90%;
-        letter-spacing: 3px;
-        line-height: 1.4;
-    }
-
-    .arrow {
-        font-size: 45px;
-    }
+    z-index:2;
 }
 
-</style>
-</head>
+.constellation span{
+    position:absolute;
 
-<body>
+    width:5px;
+    height:5px;
 
-<div class="glow"></div>
+    background:white;
+    border-radius:50%;
 
-<div class="scene">
+    box-shadow:
+        0 0 6px white,
+        0 0 15px #ff8ca5;
 
-    <div class="flash"></div>
+    opacity:0;
 
-    <!-- TIGERS -->
-    <div class="tiger left">🐅</div>
-    <div class="tiger right">🐅</div>
-
-    <!-- HEART -->
-    <div class="heart" id="heart">
-        ❤️
-    </div>
-
-    <!-- ARROW -->
-    <div class="arrow">
-        🏹
-    </div>
-
-    <!-- ONLY WORDS ON THE PAGE -->
-    <div class="love">
-        I LOVE YOU<br>
-        NATHAN LESUKIVITI
-    </div>
-
-</div>
-
-<script>
-
-/* STARS */
-
-for(let i = 0; i < 100; i++){
-
-    const star = document.createElement("div");
-
-    star.className = "star";
-
-    star.innerHTML = "✦";
-
-    star.style.left = Math.random()*100 + "%";
-    star.style.top = Math.random()*100 + "%";
-
-    star.style.animationDelay =
-        Math.random()*3 + "s";
-
-    star.style.fontSize =
-        (2 + Math.random()*5) + "px";
-
-    document.body.appendChild(star);
-}
-
-
-/* FLOATING HEARTS */
-
-const heartSymbols = [
-    "❤️",
-    "💗",
-    "💖",
-    "💕",
-    "💘",
-    "💓"
-];
-
-function createHeart(){
-
-    const h = document.createElement("div");
-
-    h.className = "floating-heart";
-
-    h.innerHTML =
-        heartSymbols[
-            Math.floor(
-                Math.random()*heartSymbols.length
-            )
-        ];
-
-    h.style.left =
-        Math.random()*100 + "%";
-
-    h.style.fontSize =
-        (12 + Math.random()*25) + "px";
-
-    h.style.animationDuration =
-        (5 + Math.random()*6) + "s";
-
-    document.body.appendChild(h);
-
-    setTimeout(() => {
-        h.remove();
-    }, 12000);
-}
-
-setInterval(createHeart, 350);
-
-
-/* HEART EXPLOSION */
-
-setTimeout(() => {
-
-    const heart =
-        document.getElementById("heart");
-
-    const rect =
-        heart.getBoundingClientRect();
-
-    const centerX =
-        rect.left + rect.width/2;
-
-    const centerY =
-        rect.top + rect.height/2;
-
-    for(let i=0; i<50; i++){
-
-        const p =
-            document.createElement("div");
-
-        p.className = "particle";
-
-        p.innerHTML =
-            Math.random() > .5
-            ? "❤️"
-            : "✨";
-
-        p.style.left =
-            centerX + "px";
-
-        p.style.top =
-            centerY + "px";
-
-        p.style.setProperty(
-            "--x",
-            (Math.random()*500-250) + "px"
-        );
-
-        p.style.setProperty(
-            "--y",
-            (Math.random()*500-250) + "px"
-        );
-
-        document.body.appendChild(p);
-
-        setTimeout(() => {
-            p.remove();
-        }, 2000);
-    }
-
-}, 3200);
-
-</script>
-
-</body>
-</html>
+    anima
 ```
-
