@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Animated Heart</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #0e0e12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  canvas {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<canvas id="heart-canvas" width="500" height="480"></canvas>
+
+<script>
+(function(){
+  var canvas = document.getElementById('heart-canvas');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var cx = W/2, cy = H/2 + 15;
+
+  var N = 160;
+  var particles = [];
+
+  function heartPoint(t, scale){
+    var x = 16 * Math.pow(Math.sin(t), 3);
+    var y = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+    return { x: cx + x*scale, y: cy - y*scale };
+  }
+
+  for (var i=0;i<N;i++){
+    var t = (i / N) * Math.PI * 2;
+    var p1 = heartPoint(t, 9.5);
+    var p2 = heartPoint(t + 0.04, 9.5);
+    var angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+    var midx = (p1.x+p2.x)/2, midy = (p1.y+p2.y)/2;
+
+    var startAngle = Math.random() * Math.PI * 2;
+    var startDist = 240 + Math.random()*130;
+
+    var hue = 336 - (i/N)*40;
+    particles.push({
+      targetX: midx, targetY: midy, targetAngle: angle,
+      startX: cx + Math.cos(startAngle)*startDist,
+      startY: cy + Math.sin(startAngle)*startDist,
+      startAngle: Math.random()*Math.PI*2,
+      len: 9 + Math.random()*6,
+      color: 'hsl(' + hue + ', 72%, 60%)',
+      delay: Math.random()*0.35
+    });
+  }
+
+  function easeOutCubic(x){ return 1 - Math.pow(1-x, 3); }
+  function easeInOutCubic(x){ return x<0.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2; }
+  function lerp(a,b,t){ return a+(b-a)*t; }
+
+  var CONVERGE = 2600, HOLD = 700, PULSE = 1400, TEXT_HOLD = 1200, SCATTER = 1500, GAP = 500;
+  var TOTAL = CONVERGE + HOLD + PULSE + TEXT_HOLD + SCATTER + GAP;
+  var start = performance.now();
+
+  function drawGlowBackground(){
+    var grad = ctx.createRadialGradient(cx, cy, 20, cx, cy, 280);
+    grad.addColorStop(0, 'rgba(212,83,126,0.10)');
+    grad.addColorStop(1, 'rgba(14,14,18,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,W,H);
+  }
+
+  function frame(now){
+    var elapsed = (now - start) % TOTAL;
+    ctx.clearRect(0,0,W,H);
+    drawGlowBackground();
+
+    var phase, phaseT;
+    var t1 = CONVERGE;
+    var t2 = t1 + HOLD;
+    var t3 = t2 + PULSE;
+    var t4 = t3 + TEXT_HOLD;
+    var t5 = t4 + SCATTER;
+
+    if (elapsed < t1){ phase = 'converge'; phaseT = elapsed / CONVERGE; }
+    else if (elapsed < t2){ phase = 'hold'; phaseT = 1; }
+    else if (elapsed < t3){ phase = 'pulse'; phaseT = (elapsed - t2) / PULSE; }
+    else if (elapsed < t4){ phase = 'text'; phaseT = (elapsed - t3) / TEXT_HOLD; }
+    else if (elapsed < t5){ phase = 'scatter'; phaseT = (elapsed - t4) / SCATTER; }
+    else { phase = 'gap'; phaseT = 0; }
+
+    var pulseScale = 1;
+    if (phase === 'pulse'){
+      pulseScale = 1 + Math.sin(phaseT * Math.PI * 3) * 0.055 * (1 - phaseT*0.3);
+    }
+
+    for (var i=0;i<particles.length;i++){
+      var p = particles[i];
+      var x, y, ang, alpha, len;
+
+      if (phase === 'converge'){
+        var local = Math.min(1, Math.max(0, (phaseT - p.delay) / (1 - p.delay + 0.001)));
+        var e = easeOutCubic(local);
+        x = lerp(p.startX, p.targetX, e);
+        y = lerp(p.startY, p.targetY, e);
+        ang = lerp(p.startAngle, p.targetAngle, e);
+        alpha = Math.min(1, local*2.2);
+        len = lerp(p.len*1.6, p.len, e);
+      } else if (phase === 'hold'){
+        x = p.targetX; y = p.targetY; ang = p.targetAngle; alpha = 1; len = p.len;
+      } else if (phase === 'pulse' || phase === 'text'){
+        var sc = phase === 'pulse' ? pulseScale : 1;
+        x = cx + (p.targetX-cx)*sc;
+        y = cy + (p.targetY-cy)*sc;
+        ang = p.targetAngle; alpha = 1; len = p.len;
+      } else if (phase === 'scatter'){
+        var e2 = easeInOutCubic(phaseT);
+        x = lerp(p.targetX, p.startX, e2);
+        y = lerp(p.targetY, p.startY, e2);
+        ang = lerp(p.targetAngle, p.startAngle + Math.PI, e2);
+        alpha = 1 - e2*0.95;
+        len = lerp(p.len, p.len*1.6, e2);
+      } else {
+        x = p.startX; y = p.startY; ang = p.startAngle; alpha = 0; len = p.len;
+      }
+
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(ang);
+      ctx.globalAlpha = Math.max(0, alpha);
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = 2.6;
+      ctx.lineCap = 'round';
+      ctx.shadowColor = p.color;
+      ctx.shadowBlur = 6;
+      ctx.beginPath();
+      ctx.moveTo(-len/2, 0);
+      ctx.lineTo(len/2, 0);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    var textAlpha = 0;
+    if (phase === 'pulse'){
+      textAlpha = Math.min(1, phaseT / 0.5);
+    } else if (phase === 'text'){
+      textAlpha = phaseT < 0.8 ? 1 : 1 - (phaseT - 0.8) / 0.2;
+    }
+
+    if (textAlpha > 0){
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, Math.min(1, textAlpha));
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '500 30px Segoe UI, Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = 'rgba(212,83,126,0.9)';
+      ctx.shadowBlur = 14;
+      ctx.fillText('love you 😘', cx, cy);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
